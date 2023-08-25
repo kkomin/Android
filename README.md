@@ -1,2 +1,2 @@
-# Android
-AndroidStudio를 통해 제작한 개인과제
+# AndroidBasic
+Basic Practical Tasks Using Android Studio
