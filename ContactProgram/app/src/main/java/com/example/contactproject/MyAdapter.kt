@@ -3,7 +3,6 @@ package com.example.contactproject
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.Recycler
 import com.example.contactproject.databinding.ItemRecycleBinding
 import com.example.contactproject.databinding.ItemRecycleFavoriteBinding
 
@@ -23,7 +22,18 @@ class MyAdapter(val mItems : MutableList<MyItem>) : RecyclerView.Adapter<Recycle
                 val binding = ItemRecycleFavoriteBinding.inflate(LayoutInflater.from(parent.context), parent, false)
                 SpecialHolder(binding)
             }
+            else -> throw IllegalAccessException("")
         }
+    }
+
+    // item의 viewtype 설정
+    override fun getItemViewType(position: Int): Int {
+        val item = mItems[position]
+        return if(item.aFavorite)
+            TYPE_NORMAL
+        else
+            TYPE_SPECIAL
+        // return super.getItemViewType(position)
     }
 
     override fun getItemCount(): Int {
