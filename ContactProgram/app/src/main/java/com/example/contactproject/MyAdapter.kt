@@ -1,7 +1,11 @@
 package com.example.contactproject
 
+import android.text.Layout
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.contactproject.databinding.ItemRecycleBinding
 import com.example.contactproject.databinding.ItemRecycleFavoriteBinding
@@ -13,27 +17,17 @@ class MyAdapter(val mItems : MutableList<MyItem>) : RecyclerView.Adapter<Recycle
 
     // 즐겨찾기 여부에 따른 viewHolder 생성
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        val view : View
         return when(viewType) {
             TYPE_NORMAL -> {
-                val binding = ItemRecycleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                NormalHolder(binding)
+                view = LayoutInflater.from(parent.context).inflate(R.layout.item_recycle, parent, false)
+                NormalHolder(view)
             }
-            TYPE_SPECIAL -> {
-                val binding = ItemRecycleFavoriteBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                SpecialHolder(binding)
+            else -> {
+                view = LayoutInflater.from(parent.context).inflate(R.layout.item_recycle_favorite, parent, false)
+                SpecialHolder(view)
             }
-            else -> throw IllegalAccessException("")
         }
-    }
-
-    // item의 viewtype 설정
-    override fun getItemViewType(position: Int): Int {
-        val item = mItems[position]
-        return if(item.aFavorite)
-            TYPE_NORMAL
-        else
-            TYPE_SPECIAL
-        // return super.getItemViewType(position)
     }
 
     override fun getItemCount(): Int {
@@ -42,35 +36,46 @@ class MyAdapter(val mItems : MutableList<MyItem>) : RecyclerView.Adapter<Recycle
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         // 선택한 아이템 상수로 정의
-        val item = mItems[position]
-
-        when(holder) {
-            is NormalHolder -> {
-                holder.image.setImageResource(item.aIcon)
-                holder.name.text = item.aName
-                holder.number.text = item.aNumber
+        val item = mItems[position].type
+        when(item) {
+            TYPE_NORMAL -> {
+                (holder as NormalHolder).bind(mItems[position])
+                holder.setIsRecyclable(false)
             }
-            is SpecialHolder -> {
-                holder.image.setImageResource(item.aIcon)
-                holder.name.text = item.aName
-                holder.number.text = item.aNumber
+            TYPE_SPECIAL -> {
+                (holder as SpecialHolder).bind(mItems[position])
+                holder.setIsRecyclable(false)
             }
         }
     }
 
     // 즐겨찾기 안했을 시 viewHolder 클래스 정의
-    inner class NormalHolder(binding : ItemRecycleBinding) : RecyclerView.ViewHolder(binding.root){
-        val image = binding.imageView
-        val name = binding.tvName
-        val number = binding.tvNumber
-        //val favorite = binding.star
+    inner class NormalHolder(view : View) : RecyclerView.ViewHolder(view){
+        val image = view.findViewById<ImageView>(R.id.imageView)
+        val name = view.findViewById<TextView>(R.id.tvName)
+        val number = view.findViewById<TextView>(R.id.tvNumber)
+        val favorite = view.findViewById<ImageView>(R.id.star)
+
+        fun bind(item:MyItem) {
+            image.setImageResource(item.aIcon)
+            favorite.setImageResource(item.aIcon)
+            name.text = item.aName
+            number.text = item.aNumber
+        }
     }
 
     // 즐겨찾기 시 viewHolder 클래스 정의
-    inner class SpecialHolder(binding : ItemRecycleFavoriteBinding) : RecyclerView.ViewHolder(binding.root){
-        val image = binding.imageView
-        val name = binding.tvName
-        val number = binding.tvNumber
-        //val favorite = binding.star
+    inner class SpecialHolder(view:View) : RecyclerView.ViewHolder(view) {
+        val image = view.findViewById<ImageView>(R.id.imageView)
+        val name = view.findViewById<TextView>(R.id.tvName)
+        val number = view.findViewById<TextView>(R.id.tvNumber)
+        val favorite = view.findViewById<ImageView>(R.id.star)
+
+        fun bind(item:MyItem) {
+            image.setImageResource(item.aIcon)
+            favorite.setImageResource(item.aIcon)
+            name.text = item.aName
+            number.text = item.aNumber
+        }
     }
 }

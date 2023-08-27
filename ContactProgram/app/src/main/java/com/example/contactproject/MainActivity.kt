@@ -16,16 +16,16 @@ class MainActivity : AppCompatActivity() {
 
         // 데이터 원본
         val dataList = mutableListOf<MyItem>()
-        dataList.add(MyItem(R.drawable.sample_0, "Holly", "010-1234-1234", false))
-        dataList.add(MyItem(R.drawable.sample_1, "Molly", "010-1111-2222", false))
-        dataList.add(MyItem(R.drawable.sample_2, "LilNasX", "010-7926-2288", false))
-        dataList.add(MyItem(R.drawable.sample_3, "Charlie", "010-3784-5573", false))
-        dataList.add(MyItem(R.drawable.sample_4, "Malone", "010-9023-3379", false))
-        dataList.add(MyItem(R.drawable.sample_5, "Jenny", "010-3549-0012", false))
-        dataList.add(MyItem(R.drawable.sample_6, "Tom", "010-2738-9928", false))
-        dataList.add(MyItem(R.drawable.sample_7, "Happy", "010-2807-7711", false))
-        dataList.add(MyItem(R.drawable.sample_0, "Paganini", "010-1142-4444", false))
-        dataList.add(MyItem(R.drawable.sample_0, "Camilla", "010-7700-2288", false))
+        dataList.add(MyItem(R.drawable.sample_0, "Holly", "010-1234-1234", 1))
+        dataList.add(MyItem(R.drawable.sample_1, "Molly", "010-1111-2222", 0))
+        dataList.add(MyItem(R.drawable.sample_2, "LilNasX", "010-7926-2288", 1))
+        dataList.add(MyItem(R.drawable.sample_3, "Charlie", "010-3784-5573", 1))
+        dataList.add(MyItem(R.drawable.sample_4, "Malone", "010-9023-3379", 0))
+        dataList.add(MyItem(R.drawable.sample_5, "Jenny", "010-3549-0012", 0))
+        dataList.add(MyItem(R.drawable.sample_6, "Tom", "010-2738-9928", 0))
+        dataList.add(MyItem(R.drawable.sample_7, "Happy", "010-2807-7711", 0))
+        dataList.add(MyItem(R.drawable.sample_0, "Paganini", "010-1142-4444", 1))
+        dataList.add(MyItem(R.drawable.sample_0, "Camilla", "010-7700-2288", 0))
 
         binding.recyclerView.adapter = MyAdapter(dataList)
 
