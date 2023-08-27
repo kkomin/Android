@@ -3,7 +3,9 @@ package com.example.contactproject
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.Recycler
 import com.example.contactproject.databinding.ItemRecycleBinding
+import com.example.contactproject.databinding.ItemRecycleFavoriteBinding
 
 class MyAdapter(val mItems : MutableList<MyItem>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     // 즐겨찾기 여부 viewType 상수 정의
@@ -17,6 +19,10 @@ class MyAdapter(val mItems : MutableList<MyItem>) : RecyclerView.Adapter<Recycle
                 val binding = ItemRecycleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
                 NormalHolder(binding)
             }
+            TYPE_SPECIAL -> {
+                val binding = ItemRecycleFavoriteBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                SpecialHolder(binding)
+            }
         }
     }
 
@@ -25,19 +31,22 @@ class MyAdapter(val mItems : MutableList<MyItem>) : RecyclerView.Adapter<Recycle
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        TODO("Not yet implemented")
+
     }
 
     // 즐겨찾기 안했을 시 viewHolder 클래스 정의
-    class NormalHolder(binding : ItemRecycleBinding) {
+    inner class NormalHolder(binding : ItemRecycleBinding) : RecyclerView.ViewHolder(binding.root){
         val image = binding.imageView
         val name = binding.tvName
         val number = binding.tvNumber
-        val favorite = binding.star
+        //val favorite = binding.star
     }
 
     // 즐겨찾기 시 viewHolder 클래스 정의
-    class SpecialHolder() {
-
+    inner class SpecialHolder(binding : ItemRecycleFavoriteBinding) : RecyclerView.ViewHolder(binding.root){
+        val image = binding.imageView
+        val name = binding.tvName
+        val number = binding.tvNumber
+        //val favorite = binding.star
     }
 }
