@@ -2,8 +2,6 @@ package com.example.contactproject
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Adapter
-import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.contactproject.databinding.ActivityMainBinding
 
