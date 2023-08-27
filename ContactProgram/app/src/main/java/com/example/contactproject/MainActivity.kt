@@ -1,4 +1,4 @@
-package com.example.contactprogram
+package com.example.contactproject
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
