@@ -31,7 +31,21 @@ class MyAdapter(val mItems : MutableList<MyItem>) : RecyclerView.Adapter<Recycle
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        // 선택한 아이템 상수로 정의
+        val item = mItems[position]
 
+        when(holder) {
+            is NormalHolder -> {
+                holder.image.setImageResource(item.aIcon)
+                holder.name.text = item.aName
+                holder.number.text = item.aNumber
+            }
+            is SpecialHolder -> {
+                holder.image.setImageResource(item.aIcon)
+                holder.name.text = item.aName
+                holder.number.text = item.aNumber
+            }
+        }
     }
 
     // 즐겨찾기 안했을 시 viewHolder 클래스 정의
