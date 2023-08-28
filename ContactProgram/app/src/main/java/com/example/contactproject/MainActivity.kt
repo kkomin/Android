@@ -1,7 +1,12 @@
 package com.example.contactproject
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.contactproject.databinding.ActivityMainBinding
 
@@ -31,6 +36,17 @@ class MainActivity : AppCompatActivity() {
 
         val adapter = MyAdapter(dataList)
         binding.recyclerView.adapter = adapter
+
+        // 항목 클릭시 전화로 연결
+        adapter.itemClick = object : MyAdapter.ItemClick {
+            override fun onClick(view: View, position: Int) {
+                val number = dataList[position].aNumber
+                val dial = Intent(Intent.ACTION_DIAL).apply {
+                    data = Uri.parse("tel:$number")
+                }
+                startActivity(dial)
+            }
+        }
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
     }
 }

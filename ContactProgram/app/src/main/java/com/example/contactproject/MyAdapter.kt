@@ -20,6 +20,12 @@ class MyAdapter(val mItems : MutableList<MyItem>) : RecyclerView.Adapter<Recycle
         mItems.addAll(sortedList)
     }
 
+    interface ItemClick {
+        fun onClick(view : View, position : Int)
+    }
+
+    var itemClick : ItemClick? = null
+
     // 즐겨찾기 여부에 따른 viewHolder 생성
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view : View
