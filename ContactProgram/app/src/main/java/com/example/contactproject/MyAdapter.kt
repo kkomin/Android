@@ -1,14 +1,11 @@
 package com.example.contactproject
 
-import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.contactproject.databinding.ItemRecycleBinding
-import com.example.contactproject.databinding.ItemRecycleFavoriteBinding
 
 class MyAdapter(val mItems : MutableList<MyItem>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     // 즐겨찾기 여부 viewType 상수 정의
@@ -29,9 +26,12 @@ class MyAdapter(val mItems : MutableList<MyItem>) : RecyclerView.Adapter<Recycle
             }
         }
     }
-
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return mItems.size
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return mItems[position].type
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -54,11 +54,9 @@ class MyAdapter(val mItems : MutableList<MyItem>) : RecyclerView.Adapter<Recycle
         val image = view.findViewById<ImageView>(R.id.imageView)
         val name = view.findViewById<TextView>(R.id.tvName)
         val number = view.findViewById<TextView>(R.id.tvNumber)
-        val favorite = view.findViewById<ImageView>(R.id.star)
 
         fun bind(item:MyItem) {
             image.setImageResource(item.aIcon)
-            favorite.setImageResource(item.aIcon)
             name.text = item.aName
             number.text = item.aNumber
         }
@@ -69,11 +67,9 @@ class MyAdapter(val mItems : MutableList<MyItem>) : RecyclerView.Adapter<Recycle
         val image = view.findViewById<ImageView>(R.id.imageView)
         val name = view.findViewById<TextView>(R.id.tvName)
         val number = view.findViewById<TextView>(R.id.tvNumber)
-        val favorite = view.findViewById<ImageView>(R.id.star)
 
         fun bind(item:MyItem) {
             image.setImageResource(item.aIcon)
-            favorite.setImageResource(item.aIcon)
             name.text = item.aName
             number.text = item.aNumber
         }

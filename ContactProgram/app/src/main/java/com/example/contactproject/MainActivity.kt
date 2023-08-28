@@ -24,8 +24,8 @@ class MainActivity : AppCompatActivity() {
         dataList.add(MyItem(R.drawable.sample_5, "Jenny", "010-3549-0012", 0))
         dataList.add(MyItem(R.drawable.sample_6, "Tom", "010-2738-9928", 0))
         dataList.add(MyItem(R.drawable.sample_7, "Happy", "010-2807-7711", 0))
-        dataList.add(MyItem(R.drawable.sample_0, "Paganini", "010-1142-4444", 1))
-        dataList.add(MyItem(R.drawable.sample_0, "Camilla", "010-7700-2288", 0))
+        dataList.add(MyItem(R.drawable.sample_8, "Paganini", "010-1142-4444", 1))
+        dataList.add(MyItem(R.drawable.sample_9, "Camilla", "010-7700-2288", 0))
 
         binding.recyclerView.adapter = MyAdapter(dataList)
 
