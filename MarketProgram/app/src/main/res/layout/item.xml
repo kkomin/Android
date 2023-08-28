@@ -14,7 +14,6 @@
         android:scaleType="centerCrop"
         android:layout_gravity="center_vertical"
         android:background="@drawable/round_box"
-        android:clipToOutline="true"
         android:src="@drawable/sample1"/>
 
     <LinearLayout
