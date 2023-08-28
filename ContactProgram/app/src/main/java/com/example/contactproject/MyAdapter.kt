@@ -12,6 +12,14 @@ class MyAdapter(val mItems : MutableList<MyItem>) : RecyclerView.Adapter<Recycle
     private val TYPE_NORMAL = 0
     private val TYPE_SPECIAL = 1
 
+    // 즐겨찾기 여부에 따른 리스트 정렬
+    init {
+        // 즐겨찾기 된 항목이 상단에 배치
+        val sortedList = mItems.sortedBy { it.type == TYPE_NORMAL }
+        mItems.clear()
+        mItems.addAll(sortedList)
+    }
+
     // 즐겨찾기 여부에 따른 viewHolder 생성
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view : View
