@@ -13,3 +13,7 @@ Basic Practical Tasks Using Android Studio.
 
 ## KioskProgram
 TwosomePlace 카페의 키오스크를 구현
+
+## ContactProgram
+전화번호부를 구현\n
+2개의 viewType을 이용해 상단에는 즐겨찾기가 된 항목들을 배치, 하단에는 즐겨찾기가 된 항목들을 배치했다.
