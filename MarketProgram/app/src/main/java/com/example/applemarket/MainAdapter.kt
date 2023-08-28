@@ -1,12 +1,14 @@
 package com.example.applemarket
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.applemarket.databinding.ItemBinding
 
 class MainAdapter (val mItems : MutableList<ItemData>) : RecyclerView.Adapter<MainAdapter.Holder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-        TODO("Not yet implemented")
+        val binding = ItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return Holder(binding)
     }
 
     override fun getItemCount(): Int {
