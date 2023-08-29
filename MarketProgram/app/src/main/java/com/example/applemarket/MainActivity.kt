@@ -1,7 +1,9 @@
 package com.example.applemarket
 
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.applemarket.databinding.ActivityMainBinding
@@ -57,5 +59,16 @@ class MainActivity : AppCompatActivity() {
 
         // RecyclerView에 DividerItemDecoration 추가
         binding.recyclerView.addItemDecoration(dividerItemDecoration)
+
+    }
+
+    // 뒤로 가기 버튼을 눌렀을 때, 다이얼로그 표시
+    override fun onBackPressed() {
+        AlertDialog.Builder(this)
+            .setTitle("종료")
+            .setIcon(R.drawable.chat)
+            .setMessage("정말 종료하시겠습니까 ?")
+            .setPositiveButton("확인") {_, _-> finish()}
+            .setNegativeButton("취소", null).show()
     }
 }
