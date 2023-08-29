@@ -1,5 +1,5 @@
 package com.example.applemarket
 
 data class ItemData(val num : Int, val image : Int, val name : String,
-                    val des : String, val seller : String, val price : String,
+                    val des : String, val seller : String, val price : Int,
                     val address : String, val heart : Int, val chat : Int) {}

@@ -4,6 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.applemarket.databinding.ItemBinding
+import java.text.DecimalFormat
+import java.text.NumberFormat
+import java.util.Locale
 
 class MainAdapter (val mItems : MutableList<ItemData>) : RecyclerView.Adapter<MainAdapter.Holder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
@@ -20,18 +23,27 @@ class MainAdapter (val mItems : MutableList<ItemData>) : RecyclerView.Adapter<Ma
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
+        // 천단위 콤마( , ) 찍기
+        val formatPrice = DecimalFormat("#,###").format(mItems[position].price)
+
         // 클릭 시 이벤트 처리
         holder.itemView.setOnClickListener {
         }
         holder.image.setImageResource(mItems[position].image)
         holder.name.text = mItems[position].name
         holder.location.text = mItems[position].address
-        holder.price.text = mItems[position].price
+        holder.price.text = formatPrice
+        holder.chat.text = mItems[position].chat.toString()
+        holder.heart.text = mItems[position].heart.toString()
+
     }
     inner class Holder(binding : ItemBinding) : RecyclerView.ViewHolder(binding.root) {
         val image = binding.imageView
         val name = binding.tvName
         val location = binding.tvLocation
         val price = binding.tvPrice
+        val chat = binding.chat
+        val heart = binding.heart
+
     }
 }
