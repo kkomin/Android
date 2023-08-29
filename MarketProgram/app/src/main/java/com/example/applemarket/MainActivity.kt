@@ -1,6 +1,5 @@
 package com.example.applemarket
 
-import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
@@ -61,7 +60,6 @@ class MainActivity : AppCompatActivity() {
         binding.recyclerView.addItemDecoration(dividerItemDecoration)
 
     }
-
     // 뒤로 가기 버튼을 눌렀을 때, 다이얼로그 표시
     override fun onBackPressed() {
         AlertDialog.Builder(this)
