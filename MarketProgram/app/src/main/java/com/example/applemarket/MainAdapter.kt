@@ -1,6 +1,7 @@
 package com.example.applemarket
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.applemarket.databinding.ItemBinding
@@ -9,6 +10,13 @@ import java.text.NumberFormat
 import java.util.Locale
 
 class MainAdapter(val mItems: MutableList<ItemData>) : RecyclerView.Adapter<MainAdapter.Holder>() {
+
+    interface ItemClick {
+        fun onClick(view : View, position : Int)
+    }
+
+    var itemClick : ItemClick? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val binding = ItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return Holder(binding)
@@ -23,6 +31,11 @@ class MainAdapter(val mItems: MutableList<ItemData>) : RecyclerView.Adapter<Main
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
+        holder.itemView.setOnClickListener {
+            // 클릭시 이벤트 추가
+            itemClick?.onClick(it, position)
+        }
+
         // 천단위 콤마( , ) 찍기
         val formatPrice = DecimalFormat("#,###").format(mItems[position].price)
 
@@ -44,6 +57,5 @@ class MainAdapter(val mItems: MutableList<ItemData>) : RecyclerView.Adapter<Main
         val price = binding.tvPrice
         val chat = binding.chat
         val heart = binding.heart
-
     }
 }

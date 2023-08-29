@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,6 +13,7 @@ import com.example.applemarket.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -96,12 +98,17 @@ class MainActivity : AppCompatActivity() {
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
 
+        adapter.itemClick = object : MainAdapter.ItemClick {
+            override fun onClick(view: View, position: Int) {
+
+            }
+        }
+
         // 구분선 추가를 위한 dividerItemDecoration 객체 생성
         val dividerItemDecoration = DividerItemDecoration(this, LinearLayoutManager.VERTICAL)
 
         // RecyclerView에 DividerItemDecoration 추가
         binding.recyclerView.addItemDecoration(dividerItemDecoration)
-
     }
 
     // 뒤로 가기 버튼을 눌렀을 때, 다이얼로그 표시
@@ -130,6 +137,7 @@ class MainActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+    // 알람 기능
     fun notification() {
         val manager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
 
