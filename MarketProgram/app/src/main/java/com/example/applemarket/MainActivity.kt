@@ -1,8 +1,10 @@
 package com.example.applemarket
 
+import android.app.NotificationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -111,10 +113,25 @@ class MainActivity : AppCompatActivity() {
             .setPositiveButton("확인") { _, _ -> finish() }
             .setNegativeButton("취소", null).show()
     }
-
+    
+    // 옵션 메뉴 나오게 하기
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
-
         return true
+    }
+
+    // 옵션을 누를 경우 이벤트 설정
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.alarm -> {
+
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    fun notification() {
+        val manager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+
     }
 }
