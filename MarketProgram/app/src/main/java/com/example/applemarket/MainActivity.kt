@@ -2,6 +2,7 @@ package com.example.applemarket
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -111,4 +112,9 @@ class MainActivity : AppCompatActivity() {
             .setNegativeButton("취소", null).show()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+
+        return true
+    }
 }
