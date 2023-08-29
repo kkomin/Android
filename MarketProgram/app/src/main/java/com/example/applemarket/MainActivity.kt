@@ -2,6 +2,7 @@ package com.example.applemarket
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.applemarket.databinding.ActivityMainBinding
 
@@ -50,5 +51,11 @@ class MainActivity : AppCompatActivity() {
         val adapter = MainAdapter(dataList)
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
+
+        // 구분선 추가를 위한 dividerItemDecoration 객체 생성
+        val dividerItemDecoration = DividerItemDecoration(this, LinearLayoutManager.VERTICAL)
+
+        // RecyclerView에 DividerItemDecoration 추가
+        binding.recyclerView.addItemDecoration(dividerItemDecoration)
     }
 }
