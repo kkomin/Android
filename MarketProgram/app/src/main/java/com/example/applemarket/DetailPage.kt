@@ -15,9 +15,6 @@ class DetailPage : AppCompatActivity() {
             binding.tvPrice.text = selectedProduct?.price.toString()
         }
 
-        val bundle = Bundle()
-        FirstFragment().arguments = bundle
-
         // FirstFragment 추가
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.frameLayout, FirstFragment())
