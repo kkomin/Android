@@ -10,9 +10,17 @@ class DetailPage : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        val selectedProduct = intent.getParcelableExtra<ItemData>("selectedProduct")
+        if (selectedProduct != null) {
+            binding.tvPrice.text = selectedProduct?.price.toString()
+        }
+
+        val bundle = Bundle()
+        FirstFragment().arguments = bundle
+
         // FirstFragment 추가
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fragment_first, FirstFragment())
+        fragmentTransaction.replace(R.id.frameLayout, FirstFragment())
         fragmentTransaction.commit()
     }
 }

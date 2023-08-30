@@ -16,6 +16,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.NotificationCompat
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -109,9 +110,13 @@ class MainActivity : AppCompatActivity() {
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
 
+        // 아이템을 눌렀을 경우
         adapter.itemClick = object : MainAdapter.ItemClick {
             override fun onClick(view: View, position: Int) {
-
+                val selectedProduct = dataList[position]
+                val intent = Intent(this@MainActivity, DetailPage::class.java)
+                intent.putExtra("selectedProduct", selectedProduct)
+                startActivity(intent)
             }
         }
 

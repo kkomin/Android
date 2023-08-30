@@ -1,48 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <FrameLayout
+        android:id="@+id/fragment_first"
         android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/fragment_first"
-    tools:context=".FirstFragment">
+        android:layout_height="match_parent"
+        tools:context=".FirstFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/imageView1"
+                android:id="@+id/detail_image"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/sample1"
+                app:layout_constraintBottom_toTopOf="@id/linearLayout3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/linearLayout3"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/linearLayout3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="13dp"
                 android:orientation="horizontal"
+                android:padding="13dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView1">
+                app:layout_constraintTop_toBottomOf="@+id/detail_image">
 
                 <ImageView
                     android:id="@+id/userImage"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/user_image"
                     android:padding="10dp"
+                    android:src="@drawable/user_image"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -58,64 +57,59 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
-                        android:id="@+id/tv_id"
+                        android:id="@+id/tv_seller"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="20dp"
-                        android:textStyle="bold"
-                        android:text="난쉽" />
+                        android:text="난쉽"
+                        android:textColor="@color/black"
+                        android:textSize="25dp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tv_address"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingVertical="5dp"
-                        android:textSize="18dp"
-                        android:text="동래구 온천시 5동" />
+                        android:text="동래구 온천시 5동"
+                        android:textSize="20dp" />
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
+
             <View
                 android:id="@+id/view2"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:background="@color/lightgray"
                 android:layout_marginHorizontal="10dp"
+                android:background="@color/lightgray"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
-            <ScrollView
-                android:id="@+id/scrollView2"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="15dp"
+                android:text="선풍기 팝니다."
+                android:textSize="30dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view2" >
-
-                <TextView
-                    android:id="@+id/tv_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginVertical="15dp"
-                    android:text="선풍기 팝니다."
-                    android:textSize="28dp"
-                    android:textStyle="bold" />
-
-            </ScrollView>
+                app:layout_constraintTop_toTopOf="@id/view2"
+                app:layout_constraintStart_toStartOf="parent"/>
 
             <TextView
                 android:id="@+id/tv_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="23dp"
                 android:text="부연설명입니다만."
                 android:textSize="20dp"
-                android:padding="20dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view2" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_title" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

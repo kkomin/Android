@@ -41,6 +41,7 @@ class MainAdapter(val mItems: MutableList<ItemData>) : RecyclerView.Adapter<Main
 
         // 클릭 시 이벤트 처리
         holder.itemView.setOnClickListener {
+            itemClick?.onClick(it, position)
         }
         holder.image.setImageResource(mItems[position].image)
         holder.name.text = mItems[position].name
