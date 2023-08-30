@@ -1,12 +1,23 @@
 package com.example.applemarket
 
+import android.app.Notification
+import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Intent
+import android.graphics.BitmapFactory
+import android.media.AudioAttributes
+import android.media.Ringtone
+import android.media.RingtoneManager
+import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AlertDialog
+import androidx.core.app.NotificationCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.applemarket.databinding.ActivityMainBinding
@@ -131,7 +142,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.alarm -> {
-
+                notification()
             }
         }
         return super.onOptionsItemSelected(item)
@@ -140,6 +151,49 @@ class MainActivity : AppCompatActivity() {
     // 알람 기능
     fun notification() {
         val manager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+        val builder : NotificationCompat.Builder
 
+        // 26 버전 이상이라면
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channelId = "Market-channel"
+            val channelName = "My AppleMarket channel"
+            val channel = NotificationChannel (channelId, channelName, NotificationManager.IMPORTANCE_DEFAULT).apply {
+                // 채널에 대한 정보 설정
+                description = "My AppleMarket One description"
+                setShowBadge(true)
+                val uri : Uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+                val audioAttributes = AudioAttributes.Builder()
+                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                    .setUsage(AudioAttributes.USAGE_ALARM)
+                    .build()
+                setSound(uri, audioAttributes)
+                enableVibration(true)
+            }
+            // 채널을 Notification에 연결
+            manager.createNotificationChannel(channel)
+
+            // 채널을 이용해서 builder 생성
+            builder = NotificationCompat.Builder(this, channelId)
+        }
+        // 버전이 26 이하인 경우
+        else {
+            builder = NotificationCompat.Builder(this)
+        }
+
+        val bitmap = BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher_round)
+        val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
+        // 알림의 기본 정보
+        builder.run {
+            setSmallIcon(R.mipmap.ic_launcher)
+            setWhen(System.currentTimeMillis())
+            setContentTitle("새로운 알림 !")
+            setContentText("설정한 키워드에 대한 알림을 확인해보세요.")
+            setLargeIcon(bitmap)
+            addAction(R.mipmap.ic_launcher, "Action", pendingIntent)
+        }
+
+        manager.notify(11, builder.build())
     }
 }
