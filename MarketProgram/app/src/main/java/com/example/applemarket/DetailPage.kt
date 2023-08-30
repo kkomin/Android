@@ -16,8 +16,9 @@ class DetailPage : AppCompatActivity() {
         }
 
         // FirstFragment 추가
+        val fragment = FirstFragment.newInstance(selectedProduct!!)
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.frameLayout, FirstFragment())
+        fragmentTransaction.replace(R.id.frameLayout, fragment)
         fragmentTransaction.commit()
     }
 }
