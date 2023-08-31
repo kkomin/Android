@@ -10,6 +10,8 @@ class DetailPage : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        supportActionBar?.hide()
+
         val selectedProduct = intent.getParcelableExtra<ItemData>("selectedProduct")
         if (selectedProduct != null) {
             binding.tvPrice.text = selectedProduct?.price.toString()
