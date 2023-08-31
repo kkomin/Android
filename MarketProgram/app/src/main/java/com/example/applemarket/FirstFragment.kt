@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 
@@ -56,6 +57,11 @@ class FirstFragment : Fragment() {
             detail_address.text = address
             detail_des.text = description
             detail_image.setImageResource(image)
+
+            // 뒤로가기 버튼 기능 구현
+            view.findViewById<ImageButton>(R.id.backBtn).setOnClickListener {
+                activity?.finish()
+            }
         }
         return view
     }
