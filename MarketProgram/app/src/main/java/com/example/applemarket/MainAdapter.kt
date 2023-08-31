@@ -36,8 +36,8 @@ class MainAdapter(val mItems: MutableList<ItemData>) : RecyclerView.Adapter<Main
             itemClick?.onClick(it, position)
         }
 
-        // 천단위 콤마( , ) 찍기
-        val formatPrice = DecimalFormat("#,###").format(mItems[position].price)
+        // 천단위 콤마( , ) 찍기 -> ItemData의 formatPrice 이용
+        val formatPrice = mItems[position].formatPrice(mItems[position].price)
 
         // 클릭 시 이벤트 처리
         holder.itemView.setOnClickListener {

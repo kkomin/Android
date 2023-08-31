@@ -14,7 +14,7 @@ class DetailPage : AppCompatActivity() {
 
         val selectedProduct = intent.getParcelableExtra<ItemData>("selectedProduct")
         if (selectedProduct != null) {
-            binding.tvPrice.text = selectedProduct?.price.toString()
+            binding.tvPrice.text = selectedProduct.formatPrice(selectedProduct.price)
         }
 
         // FirstFragment 추가
