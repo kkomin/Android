@@ -13,9 +13,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        /*val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.frameLayout, TitleFragment())
-        fragmentTransaction.commit()*/
         if(savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.frameLayout, TitleFragment())
