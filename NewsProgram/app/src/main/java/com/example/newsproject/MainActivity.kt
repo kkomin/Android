@@ -1,5 +1,6 @@
 package com.example.newsproject
 
+import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.newsproject.databinding.ActivityMainBinding
@@ -13,11 +14,27 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        if(savedInstanceState == null) {
+        val currentOrientation = resources.configuration.orientation
+
+        // 가로방향일 경우
+        if(currentOrientation == Configuration.ORIENTATION_LANDSCAPE) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.frameLayout, TitleFragment())
                 .commit()
         }
+
+        // 세로방향일 경우
+        else {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.frameLayout, DetailFragment())
+                .commit()
+        }
+
+        /*if(savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.frameLayout, TitleFragment())
+                .commit()
+        }*/
     }
 
     fun showDetailFragent(Title : String, Content : String){
