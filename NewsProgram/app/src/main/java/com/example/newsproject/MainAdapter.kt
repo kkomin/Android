@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newsproject.databinding.ItemRecyclerBinding
 
-class MainAdapter(val mItems : MutableList<NewsItem>) : RecyclerView.Adapter<MainAdapter.Holder>(){
+class MainAdapter(val mItems : List<NewsItem>) : RecyclerView.Adapter<MainAdapter.Holder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainAdapter.Holder {
         val binding = ItemRecyclerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return Holder(binding)

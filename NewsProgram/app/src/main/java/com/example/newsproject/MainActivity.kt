@@ -13,8 +13,21 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        /*val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.frameLayout, TitleFragment())
-        fragmentTransaction.commit()
+        fragmentTransaction.commit()*/
+        if(savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.frameLayout, TitleFragment())
+                .commit()
+        }
+    }
+
+    fun showDetailFragent(Title : String, Content : String){
+        val detailFragment = DetailFragment.newInstance(Title, Content)
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.frameLayout, DetailFragment())
+            .addToBackStack(null)
+            .commit()
     }
 }
