@@ -1,5 +1,6 @@
 package com.example.newsproject
 
+import android.icu.text.Transliterator.Position
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -12,10 +13,10 @@ class MainAdapter(val mItems : MutableList<NewsItem>) : RecyclerView.Adapter<Mai
     }
 
     override fun onBindViewHolder(holder: MainAdapter.Holder, position: Int) {
-        holder.img
-        holder.title
-        holder.content
-        holder.Date
+        holder.img.setImageResource(mItems[position].image)
+        holder.title.text = mItems[position].title
+        holder.content.text = mItems[position].article
+        holder.Date.text = mItems[position].date
     }
 
     override fun getItemCount(): Int {
