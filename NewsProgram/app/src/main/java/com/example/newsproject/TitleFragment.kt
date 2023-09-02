@@ -34,6 +34,20 @@ class TitleFragment : Fragment() {
             override fun onClick(view: View, position: Int) {
                 // 항목 클릭시 처리
                 val selectedItem = newsData[position]
+                val selectedArticle = selectedItem.article
+                val selectedDate = selectedItem.date
+                val selectedTitle = selectedItem.title
+                val selectedImage = selectedItem.image
+
+                val bundle = Bundle()
+                bundle.putString("title", selectedTitle)
+                bundle.putString("article", selectedArticle)
+                bundle.putString("date", selectedDate)
+                bundle.putInt("image", selectedImage)
+
+                // bundle을 detailfragmentㅀ 전달
+                DetailFragment().arguments = bundle
+
                 val detailFragment = DetailFragment.newInstance(selectedItem)
                 requireActivity().supportFragmentManager.beginTransaction()
                     .replace(R.id.frameLayout, detailFragment)
