@@ -27,16 +27,8 @@ class MainActivity : AppCompatActivity() {
         // 세로방향일 경우
         else {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.title_frame, TitleFragment())
+                .replace(R.id.frameLayout, TitleFragment())
                 .commit()
         }
-    }
-
-    fun showDetailFragent(Title : String, Content : String){
-        val detailFragment = DetailFragment.newInstance(Title, Content)
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.detail_frame, DetailFragment())
-            .addToBackStack(null)
-            .commit()
     }
 }
