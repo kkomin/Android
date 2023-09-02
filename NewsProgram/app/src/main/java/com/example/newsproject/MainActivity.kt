@@ -29,12 +29,6 @@ class MainActivity : AppCompatActivity() {
                 .replace(R.id.frameLayout, DetailFragment())
                 .commit()
         }
-
-        /*if(savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.frameLayout, TitleFragment())
-                .commit()
-        }*/
     }
 
     fun showDetailFragent(Title : String, Content : String){
