@@ -19,14 +19,15 @@ class MainActivity : AppCompatActivity() {
         // 가로방향일 경우
         if(currentOrientation == Configuration.ORIENTATION_LANDSCAPE) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.frameLayout, TitleFragment())
-                .commit()
+                .add(R.id.title_frame, TitleFragment()).commit()
+            supportFragmentManager.beginTransaction()
+                .add(R.id.detail_frame, DetailFragment()).commit()
         }
 
         // 세로방향일 경우
         else {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.frameLayout, DetailFragment())
+                .replace(R.id.title_frame, TitleFragment())
                 .commit()
         }
     }
@@ -34,7 +35,7 @@ class MainActivity : AppCompatActivity() {
     fun showDetailFragent(Title : String, Content : String){
         val detailFragment = DetailFragment.newInstance(Title, Content)
         supportFragmentManager.beginTransaction()
-            .replace(R.id.frameLayout, DetailFragment())
+            .replace(R.id.detail_frame, DetailFragment())
             .addToBackStack(null)
             .commit()
     }
