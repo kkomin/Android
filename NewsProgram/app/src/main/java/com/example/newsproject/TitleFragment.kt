@@ -52,6 +52,7 @@ class TitleFragment : Fragment() {
     }
 
     private fun NewsData(): List<NewsItem> {
+        // 데이터 원본
         return listOf(
             NewsItem(
                 "이재명 피의자 출석 미루다 4일 만에 '소환 조사에 응하겠다'",
