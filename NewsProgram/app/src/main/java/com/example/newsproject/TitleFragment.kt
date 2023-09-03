@@ -40,6 +40,7 @@ class TitleFragment : Fragment() {
                 val selectedImage = selectedItem.image
 
                 val bundle = Bundle()
+                bundle.putParcelable("selected", selectedItem)
                 bundle.putString("title", selectedTitle)
                 bundle.putString("article", selectedArticle)
                 bundle.putString("date", selectedDate)
@@ -180,7 +181,7 @@ class TitleFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(newsItem: NewsItem) =
             TitleFragment().apply {
                 arguments = Bundle().apply {
                 }
