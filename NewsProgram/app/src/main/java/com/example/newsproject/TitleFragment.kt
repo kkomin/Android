@@ -1,6 +1,8 @@
 package com.example.newsproject
 
+import android.app.RemoteInput
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -40,7 +42,6 @@ class TitleFragment : Fragment() {
                 val selectedImage = selectedItem.image
 
                 val bundle = Bundle()
-                bundle.putParcelable("selected", selectedItem)
                 bundle.putString("title", selectedTitle)
                 bundle.putString("article", selectedArticle)
                 bundle.putString("date", selectedDate)
@@ -49,10 +50,11 @@ class TitleFragment : Fragment() {
                 // bundle을 detailfragmentㅀ 전달
                 DetailFragment().arguments = bundle
 
+                Log.d("title", "$selectedTitle")
+
                 val detailFragment = DetailFragment.newInstance(selectedItem)
                 requireActivity().supportFragmentManager.beginTransaction()
                     .replace(R.id.frameLayout, detailFragment)
-                    .addToBackStack(null)
                     .commit()
             }
         }
@@ -177,14 +179,5 @@ class TitleFragment : Fragment() {
                 R.drawable.sample_7
             )
         )
-    }
-
-    companion object {
-        @JvmStatic
-        fun newInstance(newsItem: NewsItem) =
-            TitleFragment().apply {
-                arguments = Bundle().apply {
-                }
-            }
     }
 }
