@@ -12,7 +12,7 @@ Basic Practical Tasks Using Android Studio.
 15조 팀원들을 소개하는 자기소개 앱
 
 ## KioskProgram
-TwosomePlace 카페의 키오스크를 구현
+TwosomePlace 카페의 키오스크 구현
 
 ## ContactProgram
 전화번호부를 구현<br/>
@@ -20,3 +20,6 @@ TwosomePlace 카페의 키오스크를 구현
 
 ## MarketProgram
 사과마켓 앱 구현 
+
+## NewsProgram
+간단한 뉴스 리더 앱 구현
