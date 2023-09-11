@@ -1,11 +1,11 @@
 package com.example.newsproject
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 
@@ -36,6 +36,12 @@ class DetailFragment : Fragment() {
         val detailArticle = view.findViewById<TextView>(R.id.detail_article)
         val detailDate = view.findViewById<TextView>(R.id.detail_date)
         val detailImage = view.findViewById<ImageView>(R.id.detail_image)
+
+        // 뒤로가기 버튼
+        view.findViewById<ImageButton>(R.id.backImage).setOnClickListener {
+            //requireActivity().supportFragmentManager.beginTransaction().replace(R.id.frameLayout, TitleFragment()).commit()
+            activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.frameLayout, TitleFragment())?.commit()
+        }
 
         arguments?.let {
             val title = it.getString("title")

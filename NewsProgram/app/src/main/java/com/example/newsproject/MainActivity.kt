@@ -14,14 +14,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val currentOrientation = resources.configuration.orientation
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.frameLayout, TitleFragment())
+            .commit()
+
+        /*val currentOrientation = resources.configuration.orientation
 
         // 가로방향일 경우
         if(currentOrientation == Configuration.ORIENTATION_LANDSCAPE) {
             supportFragmentManager.beginTransaction()
-                .add(R.id.title_frame, TitleFragment()).commit()
-            supportFragmentManager.beginTransaction()
-                .add(R.id.detail_frame, DetailFragment()).commit()
+                .replace(R.id.title_frame, TitleFragment())
+                .replace(R.id.detail_frame, DetailFragment()).commit()
         }
 
         // 세로방향일 경우
@@ -29,6 +32,6 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.frameLayout, TitleFragment())
                 .commit()
-        }
+        }*/
     }
 }
