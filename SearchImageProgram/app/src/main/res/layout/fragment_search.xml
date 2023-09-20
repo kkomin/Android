@@ -8,7 +8,7 @@
     tools:context=".SearchFragment">
 
     <LinearLayout
-        android:id="@+id/searchView"
+        android:id="@+id/searchLinear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/pink_200"
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <EditText
-            android:id="@+id/editTextText"
+            android:id="@+id/search_editText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/white"
@@ -32,7 +32,7 @@
             android:hint="검색어를 입력하세요."/>
 
         <ImageButton
-            android:id="@+id/imageView2"
+            android:id="@+id/searchbtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/pink_200"
@@ -41,7 +41,7 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/save_recyclerView"
+        android:id="@+id/search_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/pink_50"
