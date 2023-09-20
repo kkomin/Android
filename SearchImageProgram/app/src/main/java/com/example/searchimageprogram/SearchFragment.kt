@@ -10,6 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.searchimageprogram.databinding.FragmentSearchBinding
 import com.example.searchimageprogram.retrofit.NetWorkClient
 import com.example.searchimageprogram.retrofit.SearchDocument
@@ -61,6 +63,9 @@ class SearchFragment : Fragment() {
                 Log.d("ImageSearch", items.toString())
                 // 어댑터 업데이트
                 adapter = SearchAdapter(context, items)
+                layoutManager = LinearLayoutManager(context)
+                // 이미지 격자 모양으로
+                layoutManager =  StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
                 // recyclerview 일정하게
                 setHasFixedSize(true)
             }
