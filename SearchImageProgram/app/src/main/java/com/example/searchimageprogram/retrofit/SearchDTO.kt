@@ -2,8 +2,6 @@ package com.example.searchimageprogram.retrofit
 
 import com.google.gson.annotations.SerializedName
 
-data class Search(val response : SearchResponse)
-
 data class SearchResponse (
     @SerializedName("meta")
     val searchMeta: SearchMeta,
