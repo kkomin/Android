@@ -2,12 +2,14 @@ package com.example.searchimageprogram
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.service.autofill.UserData
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import com.example.searchimageprogram.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+    private val saveList = mutableListOf<SearchData>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -53,5 +55,17 @@ class MainActivity : AppCompatActivity() {
     fun loadData(text: EditText) {
         val pref = getSharedPreferences("pref", 0)
         text.setText(pref.getString("keyword", ""))
+    }
+
+    // 저장한 항목 리스트에 추가
+    fun addItemList(item : SearchData) {
+        // 항목이 저장되어 있지 않은 경우에만 저장
+        if(!saveList.contains(item))
+            saveList.add(item)
+    }
+
+    // 저장한 항목 리스트에서 제거
+    fun removeItemList(item : SearchData) {
+        saveList.remove(item)
     }
 }
