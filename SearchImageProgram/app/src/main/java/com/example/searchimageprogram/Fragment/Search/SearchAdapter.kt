@@ -1,4 +1,4 @@
-package com.example.searchimageprogram
+package com.example.searchimageprogram.Fragment.Search
 
 import android.content.Context
 import android.util.Log
@@ -10,6 +10,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.searchimageprogram.MainActivity
+import com.example.searchimageprogram.R
+import com.example.searchimageprogram.Data.SearchData
 import com.example.searchimageprogram.databinding.ItemBinding
 import com.example.searchimageprogram.retrofit.SearchDocument
 import java.time.OffsetDateTime

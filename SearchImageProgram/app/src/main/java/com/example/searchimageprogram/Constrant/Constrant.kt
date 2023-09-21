@@ -1,4 +1,6 @@
-package com.example.searchimageprogram
+package com.example.searchimageprogram.Constrant
+
+import com.example.searchimageprogram.BuildConfig
 
 class Constrant {
     companion object {

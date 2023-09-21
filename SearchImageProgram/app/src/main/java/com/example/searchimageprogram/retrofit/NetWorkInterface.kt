@@ -1,6 +1,5 @@
 package com.example.searchimageprogram.retrofit
 
-import com.example.searchimageprogram.Constrant
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.QueryMap

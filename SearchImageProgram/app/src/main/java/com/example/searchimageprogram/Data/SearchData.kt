@@ -1,4 +1,4 @@
-package com.example.searchimageprogram
+package com.example.searchimageprogram.Data
 
 data class SearchData (
     var url : String,

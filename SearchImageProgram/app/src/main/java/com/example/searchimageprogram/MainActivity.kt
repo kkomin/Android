@@ -2,9 +2,11 @@ package com.example.searchimageprogram
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.service.autofill.UserData
 import android.widget.EditText
 import androidx.fragment.app.Fragment
+import com.example.searchimageprogram.Data.SearchData
+import com.example.searchimageprogram.Fragment.Save.SaveFragment
+import com.example.searchimageprogram.Fragment.Search.SearchFragment
 import com.example.searchimageprogram.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

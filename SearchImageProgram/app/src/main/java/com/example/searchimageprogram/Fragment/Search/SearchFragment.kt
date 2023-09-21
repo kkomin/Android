@@ -1,9 +1,8 @@
-package com.example.searchimageprogram
+package com.example.searchimageprogram.Fragment.Search
 
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +10,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.example.searchimageprogram.Constrant.Constrant
+import com.example.searchimageprogram.MainActivity
+import com.example.searchimageprogram.Data.SearchData
 import com.example.searchimageprogram.databinding.FragmentSearchBinding
 import com.example.searchimageprogram.retrofit.NetWorkClient
 import com.example.searchimageprogram.retrofit.SearchDocument
