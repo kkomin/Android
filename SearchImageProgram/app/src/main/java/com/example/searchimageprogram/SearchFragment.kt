@@ -10,7 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.searchimageprogram.databinding.FragmentSearchBinding
 import com.example.searchimageprogram.retrofit.NetWorkClient
@@ -23,20 +22,9 @@ private const val ARG_PARAM2 = "param2"
 
 class SearchFragment : Fragment() {
     private val binding by lazy { FragmentSearchBinding.inflate(layoutInflater) }
-    private val main by lazy { requireActivity() as MainActivity }
+    private val main by lazy { activity as MainActivity }
     private val handler = Handler(Looper.getMainLooper())
     private var items = mutableListOf<SearchDocument>()
-
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,17 +46,21 @@ class SearchFragment : Fragment() {
         }
         return binding.root
     }
-
-
     private fun communicateNetwork(param: HashMap<String, String>) = lifecycleScope.launch {
         val authorization = "KakaoAK ${Constrant.API_KEY}"
         val response = NetWorkClient.service.searchImages(authorization, param)
         items = response.searchDocument!!
+
+        // SearchData에 데이터 추가
+        val searchDataList = items.map {
+            SearchData(it.image_url, it.display_sitename, it.datetime)
+        }
+
+        // api에서 받아온 데이터로 recyclerview 구성
         handler.post {
             binding.searchRecyclerView.apply {
-                Log.d("ImageSearch", items.toString())
                 // 어댑터 업데이트
-                adapter = SearchAdapter(context, items)
+                adapter = SearchAdapter(context, items, searchDataList)
                 // 이미지 격자 모양으로
                 layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
                 // recyclerview 일정하게
@@ -84,17 +76,5 @@ class SearchFragment : Fragment() {
             "page" to "1",
             "size" to "80"
         )
-    }
-
-
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            SearchFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
     }
 }
