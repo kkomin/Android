@@ -23,8 +23,9 @@ private const val ARG_PARAM2 = "param2"
 
 class SearchFragment : Fragment() {
     private val binding by lazy { FragmentSearchBinding.inflate(layoutInflater) }
-    private var items = mutableListOf<SearchDocument>()
+    private val main by lazy { requireActivity() as MainActivity }
     private val handler = Handler(Looper.getMainLooper())
+    private var items = mutableListOf<SearchDocument>()
 
     private var param1: String? = null
     private var param2: String? = null
@@ -41,11 +42,16 @@ class SearchFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+        // 앱 재시작 시 이전에 저장했던 검색어 불러오기
+        main.loadData(binding.searchEditText)
+
+        // 검색 버튼 눌렀을 때의 이벤트 처리
         binding.searchbtn.setOnClickListener {
             val input = binding.searchEditText.text.toString()
+            // input이 null이 아니라면 input의 공백 제거
             if (!input.isNullOrEmpty()) {
                 val trimInput = input.trim()
+                main.saveData(trimInput)
                 communicateNetwork(queryParameter(trimInput))
             } else
                 Toast.makeText(context, "검색어를 입력해주세요.", Toast.LENGTH_SHORT).show()
@@ -64,7 +70,7 @@ class SearchFragment : Fragment() {
                 // 어댑터 업데이트
                 adapter = SearchAdapter(context, items)
                 // 이미지 격자 모양으로
-                layoutManager =  StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+                layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
                 // recyclerview 일정하게
                 setHasFixedSize(true)
             }
