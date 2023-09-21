@@ -1,6 +1,7 @@
 package com.example.searchimageprogram
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,11 +15,12 @@ import com.example.searchimageprogram.retrofit.SearchDocument
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
 
-class SearchAdapter(private val mContext: Context, private val mItems: MutableList<SearchDocument>) :
+class SearchAdapter(
+    private val mContext: Context,
+    private val mItems: MutableList<SearchDocument>,
+    private val mData : List<SearchData>
+) :
     RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
-
-    private var isBookmark : Boolean = false
-
     override fun getItemCount(): Int {
         return mItems.size
     }
@@ -42,26 +44,34 @@ class SearchAdapter(private val mContext: Context, private val mItems: MutableLi
         holder.title.text = item.display_sitename
         holder.date.text = parseDate
         holder.time.text = parseTime
-
-        // 북마크 버튼을 눌렀을 경우, 북마크 이미지 변경
-        holder.bookmark.setOnClickListener {
-            if(!isBookmark) {
-                holder.bookmark.setImageResource(R.drawable.bookmark_fill)
-                isBookmark = true
-            }
-            else {
-                holder.bookmark.setImageResource(R.drawable.bookmark_empty)
-                isBookmark = false
-            }
-
-        }
     }
 
-    inner class SearchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class SearchViewHolder(view :View) : RecyclerView.ViewHolder(view) {
         val image = view.findViewById<ImageView>(R.id.imageView)
         val title = view.findViewById<TextView>(R.id.title)
         val date = view.findViewById<TextView>(R.id.date)
         val time = view.findViewById<TextView>(R.id.time)
         val bookmark = view.findViewById<ImageButton>(R.id.bookmark)
+
+        init {
+            bookmark.setOnClickListener {
+                // 아이템의 위치
+                val position = adapterPosition
+                // 아이템의 위치가 유효하다면
+                if (position != RecyclerView.NO_POSITION) {
+                    val userData = mData[position]
+                    if (userData.isSave) {
+                        bookmark.setImageResource(R.drawable.bookmark_empty)
+                        MainActivity().removeItemList(userData)
+                        Log.d("remove", "제거")
+                    } else {
+                        bookmark.setImageResource(R.drawable.bookmark_fill)
+                        MainActivity().addItemList(userData)
+                        Log.d("add", "추가")
+                    }
+                    userData.isSave = !userData.isSave
+                }
+            }
+        }
     }
 }
