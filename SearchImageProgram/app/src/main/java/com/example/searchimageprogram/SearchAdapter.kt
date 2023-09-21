@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -13,8 +14,11 @@ import com.example.searchimageprogram.retrofit.SearchDocument
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
 
-class SearchAdapter(private val mContext: Context, private val mItems: List<SearchDocument>) :
+class SearchAdapter(private val mContext: Context, private val mItems: MutableList<SearchDocument>) :
     RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
+
+    private var isBookmark : Boolean = false
+
     override fun getItemCount(): Int {
         return mItems.size
     }
@@ -38,6 +42,19 @@ class SearchAdapter(private val mContext: Context, private val mItems: List<Sear
         holder.title.text = item.display_sitename
         holder.date.text = parseDate
         holder.time.text = parseTime
+
+        // 북마크 버튼을 눌렀을 경우, 북마크 이미지 변경
+        holder.bookmark.setOnClickListener {
+            if(!isBookmark) {
+                holder.bookmark.setImageResource(R.drawable.bookmark_fill)
+                isBookmark = true
+            }
+            else {
+                holder.bookmark.setImageResource(R.drawable.bookmark_empty)
+                isBookmark = false
+            }
+
+        }
     }
 
     inner class SearchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -45,5 +62,6 @@ class SearchAdapter(private val mContext: Context, private val mItems: List<Sear
         val title = view.findViewById<TextView>(R.id.title)
         val date = view.findViewById<TextView>(R.id.date)
         val time = view.findViewById<TextView>(R.id.time)
+        val bookmark = view.findViewById<ImageButton>(R.id.bookmark)
     }
 }

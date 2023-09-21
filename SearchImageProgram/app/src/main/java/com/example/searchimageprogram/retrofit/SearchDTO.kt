@@ -6,7 +6,7 @@ data class SearchResponse (
     @SerializedName("meta")
     val searchMeta: SearchMeta,
     @SerializedName("documents")
-    val searchDocument: ArrayList<SearchDocument>
+    val searchDocument: MutableList<SearchDocument>
 )
 
 data class SearchMeta (
