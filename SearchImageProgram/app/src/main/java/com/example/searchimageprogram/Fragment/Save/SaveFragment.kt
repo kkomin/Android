@@ -13,23 +13,13 @@ import com.example.searchimageprogram.databinding.FragmentSaveBinding
 
 class SaveFragment : Fragment() {
     private val binding by lazy { FragmentSaveBinding.inflate(layoutInflater) }
-    private var savedList : List<SearchData> = emptyList()
+    private var savedList : MutableList<SearchData> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         savedList = (activity as MainActivity).saveList
-
-        /*val adapter = SaveAdapter(requireContext(), savedList)
-        binding.saveRecyclerview.adapter = adapter
-        adapter.mData = savedList.toMutableList()
-        Log.d("Data", "$savedList")
-
-        binding.saveRecyclerview.apply {
-            layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-            setHasFixedSize(true)
-        }*/
 
         binding.saveRecyclerview.adapter = SaveAdapter(requireContext(), savedList).apply {
             mData = savedList.toMutableList()

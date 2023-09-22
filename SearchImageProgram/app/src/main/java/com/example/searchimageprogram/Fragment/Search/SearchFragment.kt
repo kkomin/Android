@@ -27,7 +27,7 @@ class SearchFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // 앱 재시작 시 이전에 저장했던 검색어 불러오기
         main.loadData(binding.searchEditText)
 
@@ -52,7 +52,7 @@ class SearchFragment : Fragment() {
     private fun communicateNetwork(param: HashMap<String, String>) = lifecycleScope.launch {
         val authorization = "KakaoAK ${Constrant.API_KEY}"
         val response = NetWorkClient.service.searchImages(authorization, param)
-        items = response.searchDocument!!
+        items = response.searchDocument
 
         // SearchData에 데이터 추가
         val searchDataList = items.map {
