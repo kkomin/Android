@@ -18,15 +18,12 @@ import com.example.searchimageprogram.retrofit.NetWorkClient
 import com.example.searchimageprogram.retrofit.SearchDocument
 import kotlinx.coroutines.launch
 
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
 class SearchFragment : Fragment() {
     private val binding by lazy { FragmentSearchBinding.inflate(layoutInflater) }
     private val main by lazy { activity as MainActivity }
     private val handler = Handler(Looper.getMainLooper())
     private var items = mutableListOf<SearchDocument>()
+    private lateinit var adapter: SearchAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,6 +31,11 @@ class SearchFragment : Fragment() {
     ): View? {
         // 앱 재시작 시 이전에 저장했던 검색어 불러오기
         main.loadData(binding.searchEditText)
+
+        // 검색 창 선택 시 이전 텍스트 제거
+        binding.searchEditText.setOnClickListener {
+            binding.searchEditText.text.clear()
+        }
 
         // 검색 버튼 눌렀을 때의 이벤트 처리
         binding.searchbtn.setOnClickListener {
