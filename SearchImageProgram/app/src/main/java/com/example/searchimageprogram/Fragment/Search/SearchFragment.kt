@@ -1,5 +1,6 @@
 package com.example.searchimageprogram.Fragment.Search
 
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -7,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -44,6 +46,8 @@ class SearchFragment : Fragment() {
                 val trimInput = input.trim()
                 main.saveData(trimInput)
                 communicateNetwork(queryParameter(trimInput))
+                // 키보드 내리기
+                hideKeyboard()
             } else
                 Toast.makeText(context, "검색어를 입력해주세요.", Toast.LENGTH_SHORT).show()
         }
@@ -70,6 +74,12 @@ class SearchFragment : Fragment() {
                 setHasFixedSize(true)
             }
         }
+    }
+
+    // 키보드 내리기
+    private fun hideKeyboard() {
+        val inputMS = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMS.hideSoftInputFromWindow(binding.searchEditText.windowToken, 0)
     }
 
     private fun queryParameter(input: String): HashMap<String, String> {
