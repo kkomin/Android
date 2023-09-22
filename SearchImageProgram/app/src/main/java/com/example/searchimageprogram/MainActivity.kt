@@ -11,7 +11,7 @@ import com.example.searchimageprogram.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
-    private val saveList = mutableListOf<SearchData>()
+    var saveList = mutableListOf<SearchData>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -26,12 +26,10 @@ class MainActivity : AppCompatActivity() {
                     tranFragment(SearchFragment())
                     return@setOnNavigationItemSelectedListener true
                 }
-
                 R.id.savepage -> {
                     tranFragment(SaveFragment())
                     return@setOnNavigationItemSelectedListener true
                 }
-
                 else -> false
             }
         }

@@ -65,11 +65,11 @@ class SearchAdapter(
                     val userData = mData[position]
                     if (userData.isSave) {
                         bookmark.setImageResource(R.drawable.bookmark_empty)
-                        MainActivity().removeItemList(userData)
+                        (mContext as MainActivity).removeItemList(userData)
                         Log.d("remove", "제거")
                     } else {
                         bookmark.setImageResource(R.drawable.bookmark_fill)
-                        MainActivity().addItemList(userData)
+                        (mContext as MainActivity).addItemList(userData)
                         Log.d("add", "추가")
                     }
                     userData.isSave = !userData.isSave
