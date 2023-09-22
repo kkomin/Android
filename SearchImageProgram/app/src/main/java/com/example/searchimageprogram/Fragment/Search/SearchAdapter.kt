@@ -21,7 +21,7 @@ import java.time.format.DateTimeFormatter
 class SearchAdapter(
     private val mContext: Context,
     private val mItems: MutableList<SearchDocument>,
-    private val mData : List<SearchData>
+    var mData : List<SearchData>
 ) :
     RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
     override fun getItemCount(): Int {
@@ -35,6 +35,7 @@ class SearchAdapter(
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
         val item = mItems[position]
+        val userData = mData[position]
         // 문자열 파싱
         val parsed = OffsetDateTime.parse(item.datetime)
         // 원하는 형식으로 변환
@@ -47,6 +48,11 @@ class SearchAdapter(
         holder.title.text = item.display_sitename
         holder.date.text = parseDate
         holder.time.text = parseTime
+
+        if(userData.isSave)
+            holder.bookmark.setImageResource(R.drawable.bookmark_fill)
+        else
+            holder.bookmark.setImageResource(R.drawable.bookmark_empty)
     }
 
     inner class SearchViewHolder(view :View) : RecyclerView.ViewHolder(view) {
@@ -64,15 +70,14 @@ class SearchAdapter(
                 if (position != RecyclerView.NO_POSITION) {
                     val userData = mData[position]
                     if (userData.isSave) {
-                        bookmark.setImageResource(R.drawable.bookmark_empty)
                         (mContext as MainActivity).removeItemList(userData)
                         Log.d("remove", "제거")
                     } else {
-                        bookmark.setImageResource(R.drawable.bookmark_fill)
                         (mContext as MainActivity).addItemList(userData)
                         Log.d("add", "추가")
                     }
                     userData.isSave = !userData.isSave
+                    notifyDataSetChanged()
                 }
             }
         }
