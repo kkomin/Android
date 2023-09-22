@@ -21,18 +21,26 @@ class SaveFragment : Fragment() {
     ): View? {
         savedList = (activity as MainActivity).saveList
 
-        binding.saveRecyclerview.adapter = SaveAdapter(requireContext()).apply {
+        /*val adapter = SaveAdapter(requireContext(), savedList)
+        binding.saveRecyclerview.adapter = adapter
+        adapter.mData = savedList.toMutableList()
+        Log.d("Data", "$savedList")
+
+        binding.saveRecyclerview.apply {
+            layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+            setHasFixedSize(true)
+        }*/
+
+        binding.saveRecyclerview.adapter = SaveAdapter(requireContext(), savedList).apply {
             mData = savedList.toMutableList()
             Log.d("Data", "$mData")
+            Log.d("SaveList", "$savedList")
         }
 
         binding.saveRecyclerview.apply {
-            adapter = SaveAdapter(requireContext())
             layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             setHasFixedSize(true)
         }
-
-        // Inflate the layout for this fragment
         return binding.root
     }
 }

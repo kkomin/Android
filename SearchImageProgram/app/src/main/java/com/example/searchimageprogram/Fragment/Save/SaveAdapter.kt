@@ -14,11 +14,11 @@ import com.example.searchimageprogram.retrofit.SearchDocument
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
 
-class SaveAdapter (private val mContext: Context) : RecyclerView.Adapter<SaveAdapter.SaveViewHolder>() {
-    var mData : List<SearchData> = emptyList()
+class SaveAdapter(private val mContext: Context, var mData: List<SearchData>) :
+    RecyclerView.Adapter<SaveAdapter.SaveViewHolder>() {
     private val mItems = mutableListOf<SearchDocument>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SaveViewHolder {
-        val view =ItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val view = ItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return SaveViewHolder(view)
     }
 
@@ -40,32 +40,35 @@ class SaveAdapter (private val mContext: Context) : RecyclerView.Adapter<SaveAda
         holder.title.text = item.display_sitename
         holder.date.text = parseDate
         holder.time.text = parseTime
+
+        /*if (userData.isSave)
+            holder.bookmark.setImageResource(R.drawable.bookmark_fill)
+        else
+            holder.bookmark.setImageResource(R.drawable.bookmark_empty)
+
+        holder.bookmark.setOnClickListener {
+            if (userData.isSave) {
+                (mContext as MainActivity).removeItemList(userData)
+                Log.d("remove", "제거")
+            } else {
+                (mContext as MainActivity).addItemList(userData)
+                Log.d("add", "추가")
+            }
+            userData.isSave = !userData.isSave
+        }*/
     }
+
     inner class SaveViewHolder(binding: ItemBinding) : RecyclerView.ViewHolder(binding.root) {
         val image = binding.imageView
         val title = binding.title
         val date = binding.date
-        val time = binding.title
+        val time = binding.time
         val bookmark = binding.bookmark
 
+        // mItems 리스트 초기화
         init {
-            bookmark.setOnClickListener {
-                // 아이템의 위치
-                val position = adapterPosition
-                // 아이템의 위치가 유효하다면
-                if (position != RecyclerView.NO_POSITION) {
-                    val userData = mData[position]
-                    if (userData.isSave) {
-                        bookmark.setImageResource(R.drawable.bookmark_empty)
-                        MainActivity().removeItemList(userData)
-                        Log.d("remove", "제거")
-                    } else {
-                        bookmark.setImageResource(R.drawable.bookmark_fill)
-                        MainActivity().addItemList(userData)
-                        Log.d("add", "추가")
-                    }
-                    userData.isSave = !userData.isSave
-                }
+            mData.forEach { searchData ->
+                mItems.add(SearchDocument(searchData.url, searchData.site, searchData.dateTime))
             }
         }
     }
