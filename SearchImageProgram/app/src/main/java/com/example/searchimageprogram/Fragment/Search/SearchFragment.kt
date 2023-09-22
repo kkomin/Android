@@ -23,7 +23,6 @@ class SearchFragment : Fragment() {
     private val main by lazy { activity as MainActivity }
     private val handler = Handler(Looper.getMainLooper())
     private var items = mutableListOf<SearchDocument>()
-    private lateinit var adapter: SearchAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

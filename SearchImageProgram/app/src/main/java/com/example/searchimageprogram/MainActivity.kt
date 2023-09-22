@@ -60,7 +60,8 @@ class MainActivity : AppCompatActivity() {
     // 저장한 항목 리스트에 추가
     fun addItemList(item : SearchData) {
         // 항목이 저장되어 있지 않은 경우에만 저장
-        if(!saveList.contains(item))
+        val containList = saveList.any { it.url == item.url }
+        if(!containList)
             saveList.add(item)
     }
 
