@@ -48,9 +48,6 @@ class SaveAdapter(private val mContext: Context, var mData: MutableList<SearchDa
             val position = holder.adapterPosition
             // 인덱스 오류 방지
             if(position != RecyclerView.NO_POSITION){
-                val userData = mData[position]
-                // 해당 아이템을 저장한 리스트 제거
-                (mContext as MainActivity).removeItemList(userData)
                 // SearchData 리스트에서 해당 위치의 아이템 제거
                 mData.removeAt(position)
                 Log.d("removeData", "$mData")
